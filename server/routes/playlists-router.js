@@ -13,4 +13,5 @@ router.get('/playlist/:id', PlaylistController.getPlaylistById)
 router.get('/playlists', PlaylistController.getPlaylists)
 router.get('/playlistpairs', PlaylistController.getPlaylistPairs)
 
+//add routes for my methods in controller
 module.exports = router

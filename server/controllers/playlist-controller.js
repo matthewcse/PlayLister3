@@ -92,4 +92,5 @@ module.exports = {
     getPlaylists,
     getPlaylistPairs,
     getPlaylistById
+    //add methods here after making them
 }
