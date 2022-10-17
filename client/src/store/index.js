@@ -226,6 +226,40 @@ export const useGlobalStore = () => {
         }
         asyncSetCurrentList(id);
     }
+    
+    store.markListForDeletion = function (id) {
+        storeReducer({
+            type: GlobalStoreActionType.LIST_MARKED_FOR_DELETION,
+            payload: id
+        });
+        store.showDeleteListModal();
+    }
+
+    store.deleteMarkedList = function() {
+        store.deleteList(store.listMarkedForDeletion);
+        store.hideDeleteListModal();
+    }
+
+    store.deleteList = function(id) {
+        async function asyncDeleteList(id) {
+            let response = await api.deleteListById(id);
+            if (response.data.success) {
+                store.loadIdNamePairs();
+                store.history.push("/");
+            }
+        }
+        asyncDeleteList();
+}
+    store.showDeleteListModal = function() {
+        let modal = document.getElementById("delete-list-modal");
+        console.log(modal);
+        modal.classList.add("is-visible");
+    }
+    store.hideDeleteListModal = function() {
+        let modal = document.getElementById("delete-list-modal");
+        modal.classList.remove("is-visible");
+    }
+
     store.getPlaylistSize = function() {
         return store.currentList.songs.length;
     }
