@@ -12,9 +12,13 @@ function DeleteListModal() {
     function handleCloseModal(event) {
         store.hideDeleteListModal();
     }
+    let v = "";
+    if (store.isDeleteModalOpen()) {
+        v = " is-visible";
+    }
     return (
         <div
-            className="modal"
+            className={"modal" + v}
             id="delete-list-modal"
             data-animation="slideInOutLeft">
             <div className="modal-dialog">

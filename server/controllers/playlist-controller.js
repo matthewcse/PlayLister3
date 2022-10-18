@@ -39,6 +39,17 @@ createPlaylist = (req, res) => {
             })
         })
 }
+updatePlaylistById = async (req,res) => {
+    const body = req.body;
+    console.log("updatePlaylistById: " + JSON.stringify(body));
+    if (!body){
+        return res.status(400).json({
+            success: false,
+            error: "Needs a body to update",
+        })
+    }
+}
+
 deletePlaylist = async (req, res) => {
     console.log("deletePlaylist: " + req.params.id);
     await Playlist.findOneAndDelete({_id: req.params.id}, () =>{
@@ -101,6 +112,7 @@ module.exports = {
     getPlaylists,
     getPlaylistPairs,
     getPlaylistById,
-    deletePlaylist
+    deletePlaylist,
+    updatePlaylistById
     //add methods here after making them
 }

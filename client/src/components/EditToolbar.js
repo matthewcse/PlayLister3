@@ -13,6 +13,9 @@ function EditToolbar() {
 
     let enabledButtonClass = "playlister-button";
 
+    function handleAddSong(){
+        store.addAddSongTransaction();
+    }
     function handleUndo() {
         store.undo();
     }
@@ -24,9 +27,6 @@ function EditToolbar() {
         store.closeCurrentList();
     }
     let editStatus = false;
-    if (store.isListNameEditActive) {
-        editStatus = true;
-    }
     return (
         <span id="edit-toolbar">
             <input
@@ -35,6 +35,7 @@ function EditToolbar() {
                 disabled={editStatus}
                 value="+"
                 className={enabledButtonClass}
+                onClick={handleAddSong}
             />
             <input
                 type="button"
