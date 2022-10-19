@@ -146,7 +146,7 @@ export const useGlobalStore = () => {
         async function asyncChangeListName(id) {
             let response = await api.getPlaylistById(id);
             if (response.data.success) {
-                let playlist = response.data.playists;
+                let playlist = response.data.playlist;
                 playlist.name = newName;
                 async function updateList(playlist) {
                     response = await api.updatePlaylistById(playlist._id, playlist);
@@ -238,23 +238,6 @@ export const useGlobalStore = () => {
         }
         asyncSetCurrentList(id);
     }
-
-    store.refreshList = function (id) {
-        async function asyncrefreshList(id) {
-            let response = await api.getPlaylistById(id);
-            if (response.data.success) {
-                let playlist = response.data.playlist;
-
-                if (response.data.success) {
-                    storeReducer({
-                        type:GlobalStoreActionType.SET_CURRENT_LIST,
-                        payload: playlist
-                    });
-                }
-            }
-        }
-
-    }
     
     store.markListForDeletion = function (id) {
         storeReducer({
@@ -300,13 +283,13 @@ export const useGlobalStore = () => {
     }
 
     // THIS FUNCTION ENABLES THE PROCESS OF EDITING A LIST NAME
-    store.setlistNameActive = function () {
+    store.setListNameEditActive = function () {
         storeReducer({
             type: GlobalStoreActionType.SET_LIST_NAME_EDIT_ACTIVE,
             payload: null
         });
     }
-
+    
     //ADD TRANSACTIONS
     store.addAddSongTransaction = function() {
         if (store.currentList == null){ }

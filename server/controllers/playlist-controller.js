@@ -48,6 +48,24 @@ updatePlaylistById = async (req,res) => {
             error: "Needs a body to update",
         })
     }
+    Playlist.findOne({ _id: req.params.id }, (err, list) =>{
+        list.title = body.title
+        list.artist = body.artist
+        list.youTubeId = body.youTubeId
+        list.save().then(() => {
+            return res.status(200).json({
+                success: true,
+                id: list._id,
+                message: 'list updated',
+            })
+        }).catch(error => {
+            return res.status(404).json({
+                error,
+                message: 'list not updates'
+            })
+        })
+    })
+    
 }
 
 deletePlaylist = async (req, res) => {
